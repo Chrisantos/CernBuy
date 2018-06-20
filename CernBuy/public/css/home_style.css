@@ -1,0 +1,42 @@
+body{
+}
+div .card{
+    max-width: 200px;
+    margin-left: 3px;
+    border: 1px solid #575656;
+}
+div .img{
+    max-width: 190px;
+    height: 130px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4px;
+    margin-top: 2px;
+}
+input #button{
+    color: white;
+    background-color: black;
+    font-size: 12px;
+}
+div .row{
+    margin-top: 80px;
+    margin-left: 200px;
+}
+.details{
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    left: 0;
+    right: 0;
+    margin-right: 80px;
+}
+#price{
+    color: rgb(163, 159, 159);
+    font-size: 14px;
+}
+#cart_num{
+    background-color: black;
+    color: white;
+    font-size: 11px;
+}

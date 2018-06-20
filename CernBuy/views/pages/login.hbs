@@ -1,0 +1,65 @@
+<head>
+    {{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"> --}}
+    <link rel="stylesheet" href="/css/home_style.css">
+    <link rel="stylesheet" href="/css/sidenav.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>CernBuy - Home</title>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="/"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                {{#if user}}
+                <li><a href="/cart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart {{num}}</a></li>
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                {{else}}
+                <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                {{/if}}
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="ui grid container">
+            <div class="ui two column centered grid">
+                <div class="column">
+                    <h2>User-Login | Login to Account</h2>
+                    <form action="/login" method="post" class="ui form">
+                        <div class="field">
+                            <label>Handle</label>
+                            <input name="handle" type="text" placeholder="@handle" />
+                        </div>
+                        <div class="field">
+                            <label>Password</label>
+                            <input name="password" type="password" placeholder="*********" />
+                        </div>
+                        <button class="ui primary button" type="submit">Login</button>
+                    </form>
+                    <br>
+                    <div class="description">
+                        <a class="item" href="/signup">
+                            <span class="user">Don't have an account? Signup <i class="user icon"></i></span>
+                        </a>
+                        <br>
+                        <a class="item" href="/admin/signin">
+                            <span class="settings">Admin Login <i class="settings icon"></i></span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.12.5/js/jquery.iframe-transport.js' type='text/javascript'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.12.5/js/jquery.fileupload.js' type='text/javascript'></script>
+<script src='https://cdn.jsdelivr.net/jquery.cloudinary/1.0.18/jquery.cloudinary.min.js' type='text/javascript'></script>
+
+
+</body>

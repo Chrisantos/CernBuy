@@ -1,0 +1,119 @@
+<head>
+    {{!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"> --}}
+    <link rel="stylesheet" href="/css/home_style.css">
+    <link rel="stylesheet" href="/css/sidenav.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <title>CernBuy - Admin | New</title>
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/admin"><span class="glyphicon glyphicon-home"></span> Admin</a></li>
+                <li class="active"><a href="/admin/new"><span class="glyphicon glyphicon-th-list"></span> New Item</a></li>
+                <li><a href="/admin/logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <div class="ui grid container">
+            <div class="ui two column centered grid">
+                <div class="column">
+                    <!-- Enctype is multipart to support file upload -->
+                    <form action="/admin/create" method="post" enctype="multipart/form-data" class="ui form">
+                        <div class="field">
+                            <label>Title</label>
+                            <input name="title" type="text" placeholder="Title" />
+                        </div>
+                        <div class="field">
+                            <label>Description</label>
+                            <textarea rows="4" name="description" placeholder="Description"></textarea>
+                        </div>
+                        <div class="field">
+                            <label>Price</label>
+                            <input name="price" type="number" placeholder="$50" />
+                        </div>
+                        <div class="field">
+                            <label>Quantity</label>
+                            <input name="quantity" type="text" placeholder="Quantity" />
+                        </div>
+                        <div class="field">
+                            <label>Tags</label>
+                            <div class="ui fluid multiple search selection dropdown" id="tag">
+                                <input name="tags" type="hidden">
+                                    <i class="dropdown icon"></i>
+                                    <div class="default text">Tags</div>
+                                    <div class="menu">
+                                        <div class="item" data-value="clothings">clothings</div>
+                                        <div class="item" data-value="electronics">electronics</div>
+                                        <div class="item" data-value="grocery">grocery</div>
+                                        <div class="item" data-value="books">books</div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <label>Image</label>
+                            <input name="image" type="file" class="upload_field"/>
+                        </div>
+                        <!-- Image thumbnails will be loaded here -->
+                        <div class="thumbnails"></div>
+
+                        <div class="ui teal progress" class="progress">
+                            <div class="bar"></div>
+                        </div>
+                        <button class="ui primary button" type="submit">Post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/semantic-ui/2.2.4/semantic.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.0/jquery-ui.min.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.12.5/js/jquery.iframe-transport.js' type='text/javascript'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/blueimp-file-upload/9.12.5/js/jquery.fileupload.js' type='text/javascript'></script>
+<script src='https://cdn.jsdelivr.net/jquery.cloudinary/1.0.18/jquery.cloudinary.min.js' type='text/javascript'></script>
+
+<script src="//widget.cloudinary.com/global/all.js" type="text/javascript"></script>
+<script>
+    document.getElementById("upload_widget_opener").addEventListener("click", function() {
+
+        cloudinary.openUploadWidget({ cloud_name: 'CLOUD_NAME', upload_preset: 'UPLAOD_PRESET'},
+                function(error, result) {
+                    console.log(error, result)
+                    // Push URL into text input
+                    document.getElementById('url_text').value = result[0].url;
+                });
+
+    }, false);
+
+    // Configure Cloudinary
+$.cloudinary.config({ cloud_name: 'cernetics', api_key: '276336719369831'})
+// Perform unsigned upload
+$('.upload_field').unsigned_cloudinary_upload("UPLOAD_PRESET",
+            { cloud_name: 'cernetics',},
+            { multiple: true }
+    )
+    .bind('cloudinarydone', function(e, data) {
+        // Populate thumbnails when upload is finished
+        $('.thumbnails').append($.cloudinary.image(data.result.public_id,
+                { format: 'jpg', width: 150, height: 100,
+                    crop: 'thumb', gravity: 'face', effect: 'saturation:50' } ))
+                    })
+       .bind('cloudinaryprogress', function(e, data) {
+        // Update progress bar with upload progress
+        $('.progress').progress({
+            percent: Math.round((data.loaded * 100.0) / data.total)
+        });
+</script>
+    <script>
+        $('#tag').dropdown({
+            allowAdditions: true
+        });
+    </script>
+</body>
